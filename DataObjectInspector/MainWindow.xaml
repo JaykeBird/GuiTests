@@ -10,5 +10,7 @@
     <Grid>
         <flat:SelectPanel AllowDrop="True" x:Name="selPanel" DragEnter="selPanel_DragEnter" DragOver="selPanel_DragOver"
                           DragLeave="selPanel_DragLeave" Drop="selPanel_Drop" />
+        <TextBlock x:Name="txtExplain" Text="Drag something in here or press Ctrl+V to paste something" 
+                   IsHitTestVisible="False" VerticalAlignment="Center" HorizontalAlignment="Center" />
     </Grid>
 </flat:ThemedWindow>

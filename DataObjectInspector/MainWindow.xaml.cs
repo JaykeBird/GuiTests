@@ -66,6 +66,7 @@ namespace DropTestWPF
         void Clear()
         {
             selPanel.Items.Clear();
+            txtExplain.Visibility = Visibility.Visible;
         }
 
         void PasteData()
@@ -81,6 +82,7 @@ namespace DropTestWPF
         void RenderDataObject(IDataObject doo)
         {
             selPanel.Items.Clear();
+            txtExplain.Visibility = Visibility.Collapsed;
 
             loaded = doo;
 
