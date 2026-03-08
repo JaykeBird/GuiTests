@@ -1,9 +1,9 @@
 ﻿using SolidShineUi;
 using SolidShineUi.KeyboardShortcuts;
-using System.Configuration;
 using System.IO;
 using System.Text;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace DropTestWPF
 {
@@ -90,20 +90,35 @@ namespace DropTestWPF
             {
                 object data = doo.GetData(format);
 
-                FlatButton si = new FlatButton();
+                SplitButton si = new SplitButton();
                 si.Content = format;
                 si.Tag = data;
                 si.ToolTip = "Click to copy just this format";
                 si.Click += button_Click;
+                si.SelectOnClick = false;
+                //si.BorderThickness = new Thickness(0);
+                //si.HorizontalContentAlignment = HorizontalAlignment.Left;
+                si.Menu = new SolidShineUi.ContextMenu();
                 selPanel.Items.Add(si);
 
+                MenuItem mi1 = new MenuItem() { Header = "Copy Format" };
+                mi1.Click += (s, e) => si.DoClick();
+
+                MenuItem mi2 = new MenuItem() { Header = "Copy Format Name" };
+                mi2.Click += (s, e) => Clipboard.SetText(format);
+
+                si.Menu.Items.Add(mi1);
+                si.Menu.Items.Add(mi2);
+
                 SelectableItem sdataType = new SelectableItem(data?.GetType().FullName ?? "null", null, 12);
+                sdataType.CanSelect = false;
                 selPanel.Items.Add(sdataType);
 
                 // try to print out the data
                 if (data is string[] sa)
                 {
                     SelectableItem siData = new SelectableItem(string.Join(',', sa), null, 12);
+                    siData.CanSelect = false;
                     selPanel.Items.Add(siData);
                 }
                 //else if (data is MemoryStream ms)
@@ -116,6 +131,7 @@ namespace DropTestWPF
                 else
                 {
                     SelectableItem siData = new SelectableItem(data?.ToString() ?? "", null, 12);
+                    siData.CanSelect = false;
                     selPanel.Items.Add(siData);
                 }
             }
@@ -123,7 +139,7 @@ namespace DropTestWPF
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            if (sender is FlatButton fb && fb.Content is string s && fb.Tag != null)
+            if (sender is SplitButton fb && fb.Content is string s && fb.Tag != null)
             {
                 DataObject doo = new DataObject(s, fb.Tag);
                 Clipboard.SetDataObject(doo, true);
