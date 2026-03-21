@@ -13,12 +13,13 @@ namespace DropTestWPF
     public partial class MainWindow : ThemedWindow
     {
         IDataObject? loaded = null;
+        KeyboardShortcutHandler ksh;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            KeyboardShortcutHandler ksh = new KeyboardShortcutHandler(this);
+            ksh = new KeyboardShortcutHandler(this);
             ksh.KeyRegistry.RegisterKeyShortcut(KeyboardCombination.Ctrl, System.Windows.Input.Key.V,
                 new ActionKeyAction(PasteData, "PasteData", this));
             ksh.KeyRegistry.RegisterKeyShortcut(KeyboardCombination.Ctrl, System.Windows.Input.Key.C,
