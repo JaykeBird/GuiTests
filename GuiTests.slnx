@@ -1,3 +1,4 @@
 <Solution>
   <Project Path="DataObjectInspector/DataObjectInspector.csproj" />
+  <Project Path="ParticleEmitter/ParticleEmitter.csproj" Id="bb668fd8-ffa2-4bab-a9b1-5db05412cb87" />
 </Solution>

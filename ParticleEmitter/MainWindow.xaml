@@ -1,0 +1,53 @@
+﻿<flat:ThemedWindow x:Class="ParticleEmitter.MainWindow" x:Name="window"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ParticleEmitter"
+        xmlns:flat="clr-namespace:SolidShineUi;assembly=SolidShineUi"
+        xmlns:pl="clr-namespace:SolidShineUi.PropertyList;assembly=SolidShineUi"
+        mc:Ignorable="d"
+        Title="Particle Emitter" Height="480" Width="800" Background="White" >
+    <flat:ThemedWindow.Resources>
+        <Style TargetType="flat:FlatButton" x:Key="BaseStyle">
+            <Setter Property="TransparentBack" Value="True" />
+            <Setter Property="Padding" Value="8,1" />
+            <Setter Property="BorderSelectionThickness" Value="1" />
+        </Style>
+        <Style TargetType="flat:FlatButton" BasedOn="{StaticResource BaseStyle}" x:Key="IndentedStyle">
+            <Setter Property="Margin" Value="8,0,0,0" />
+        </Style>
+    </flat:ThemedWindow.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="24"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <local:NewParticleEmitter Grid.RowSpan="2" x:Name="emitter" />
+        <StackPanel Orientation="Horizontal" x:Name="toolbar" >
+            <flat:FlatButton x:Name="btnStart" Content="Start (F_5)" Click="btnStart_Click" Style="{StaticResource BaseStyle}" />
+            <flat:FlatButton x:Name="btnPause" Content="Pause (F_6)" Click="btnPause_Click" Style="{StaticResource BaseStyle}" />
+            <flat:FlatButton x:Name="btnClear" Content="Clear (_Del)" Click="btnClear_Click" Style="{StaticResource IndentedStyle}" />
+            <flat:FlatButton x:Name="btnSettings" Content="Settings (F_8)" Click="btnSettings_Click" Style="{StaticResource IndentedStyle}" />
+            <flat:FlatButton x:Name="btnBackground" Content="Background (F_9)" Click="btnBackground_Click" Style="{StaticResource BaseStyle}" />
+            <flat:FlatButton x:Name="btnTheme" Content="UI Theme (F_10)" Click="btnTheme_Click" Style="{StaticResource IndentedStyle}" />
+            <flat:FlatButton x:Name="btnShowHideUi" Content="Toolbar (F_12)" Click="btnShowHideUi_Click" Style="{StaticResource BaseStyle}" />
+            <flat:FlatButton x:Name="btnFullScreen" Content="FullScreen (F_11)" Click="btnFullScreen_Click" Style="{StaticResource IndentedStyle}" />
+        </StackPanel>
+        <Border Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Height="400" Width="350" Margin="0,10,0,0"
+                BorderThickness="1" BorderBrush="{Binding ElementName=window, Path=SsuiTheme.BorderBrush, FallbackValue=Black}"
+                Background="{Binding ElementName=window, Path=SsuiTheme.PanelBackground, FallbackValue=White}" Visibility="Collapsed"
+                CornerRadius="{Binding ElementName=window, Path=SsuiTheme.CornerRadius, FallbackValue=0}" x:Name="brdrSettings" >
+            <pl:PropertyList ShowNameDisplay="False" ShowTypeDisplay="False" ShowViewMenu="False" x:Name="pl" ShowInheritedProperties="False" />
+        </Border>
+        <flat:SelectPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Height="150" Width="200" Margin="0,10,0,0"
+                x:Name="selTheme" Visibility="Collapsed" MultiSelect="False" SelectionChanged="selTheme_SelectionChanged" >
+            <flat:SelectableItem Text="Light Theme" x:Name="selLight" />
+            <flat:SelectableItem Text="Dark Theme" x:Name="selDark" />
+            <flat:SelectableItem Text="Windows Accent Color" x:Name="selAccent" />
+            <flat:SelectableItem Text="High Contrast 1" x:Name="selHc1" />
+            <flat:SelectableItem Text="High Contrast 2" x:Name="selHc2" />
+            <flat:SelectableItem Text="High Contrast 3" x:Name="selHc3" />
+        </flat:SelectPanel>
+    </Grid>
+</flat:ThemedWindow>
