@@ -23,6 +23,10 @@ namespace ParticleEmitter
         public MainWindow()
         {
             InitializeComponent();
+            SsuiThemeChanged += MainWindow_SsuiThemeChanged;
+
+            Loaded += MainWindow_Loaded;
+            Closing += MainWindow_Closing;
 
             ksh = new KeyboardShortcutHandler(this);
             ksh.KeyRegistry.RegisterKeyShortcut(KeyboardCombination.None, Key.F5,
@@ -48,9 +52,13 @@ namespace ParticleEmitter
             pl.UnregisterEditor(typeof(uint));
             pl.RegisterEditor(typeof(uint), typeof(LongEditor));
             pl.ShowInheritedProperties = false;
+        }
 
-            Loaded += MainWindow_Loaded;
-            Closing += MainWindow_Closing;
+        private void MainWindow_SsuiThemeChanged(object sender, RoutedPropertyChangedEventArgs<SsuiAppTheme> e)
+        {
+            Brush b = SsuiTheme.WindowBackground.CloneCurrentValue();
+            b.Opacity = 0.5;
+            toolbar.Background = b;
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
@@ -234,6 +242,12 @@ namespace ParticleEmitter
                     default:
                         break;
                 }
+            }
+
+            if (selTheme.Visibility == Visibility.Visible)
+            {
+                selTheme.Visibility = Visibility.Collapsed;
+                btnTheme.IsSelected = false;
             }
         }
     }

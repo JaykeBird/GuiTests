@@ -7,7 +7,7 @@
         xmlns:flat="clr-namespace:SolidShineUi;assembly=SolidShineUi"
         xmlns:pl="clr-namespace:SolidShineUi.PropertyList;assembly=SolidShineUi"
         mc:Ignorable="d"
-        Title="Particle Emitter" Height="480" Width="800" Background="White" >
+        Title="Particle Emitter" Height="480" Width="800" Background="White" ThemeValueExclude="Background," >
     <flat:ThemedWindow.Resources>
         <Style TargetType="flat:FlatButton" x:Key="BaseStyle">
             <Setter Property="TransparentBack" Value="True" />
@@ -24,7 +24,7 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <local:NewParticleEmitter Grid.RowSpan="2" x:Name="emitter" />
-        <StackPanel Orientation="Horizontal" x:Name="toolbar" >
+        <StackPanel Orientation="Horizontal" x:Name="toolbar" Background="White" >
             <flat:FlatButton x:Name="btnStart" Content="Start (F_5)" Click="btnStart_Click" Style="{StaticResource BaseStyle}" />
             <flat:FlatButton x:Name="btnPause" Content="Pause (F_6)" Click="btnPause_Click" Style="{StaticResource BaseStyle}" />
             <flat:FlatButton x:Name="btnClear" Content="Clear (_Del)" Click="btnClear_Click" Style="{StaticResource IndentedStyle}" />
